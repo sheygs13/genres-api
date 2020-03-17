@@ -1,0 +1,15 @@
+{
+  "name": "genres-api",
+  "version": "1.0.0",
+  "description": "A Genres-API for a movie-rental application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sheygs13",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "express": "^4.17.1"
+  }
+}
