@@ -54,23 +54,20 @@ router.put('/:id', (req,res) => {
  const { error } = validate({ name, phone, isGold });
  if (error) return res.status(400).send(error['details'][0].message);
  Customer.findByIdAndUpdate(id, 
-    { 
+ { 
      name,
      phone, 
      isGold 
-    }, 
-    { new: true }
-    ).then(
-           (customer) => {
-            if (!customer){
-              return res.status(404).json({message: 'Customer not Found'});
-            }  
+ }, { new: true }
+ ).then((customer) => {
+          if (!customer){
+            return res.status(404).json({message: 'Customer not Found'});
+          }  
             return res.status(200).send(customer);
-           } 
-         )
-         .catch(
-          error => res.status(400).send(error.message)
-         )
+        })
+  .catch(
+      error => res.status(400).send(error.message)
+  )
  });
  
  router.delete('/:id', (req,res) => {
