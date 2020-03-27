@@ -27,57 +27,6 @@ router.post('/', async (req, res) => {
     name: user.name,
     email: user.email
  });
- // User.findOne({ email })
- //     .then(
- //       (user) => {
- //         if (!user) {
- //           let user = new User({ name, email, password });
- //           const SALT_ROUNDS = 10;
- //           bcrypt.genSalt(SALT_ROUNDS)
- //                 .then(
- //                   (salt) => {
- //                      if (salt){
- //                         bcrypt.hash(password,salt)
- //                               .then(
- //                                (hash) => {
- //                                  user = new User({
- //                                    name,
- //                                    email,
- //                                    password: hash
- //                                  });
- //                                }
- //                               ).catch(
- //                                 error => res.status(500).send(error.message)
- //                               )
- //                      }
- //                   }
- //                 ).catch(
- //                  error => res.status(500).send(error.message)
- //                 )
- //           user.save()
- //               .then(
- //                 (user) => {
- //                  // to handpick only the 
- //                  // propeties to send to the 
- //                  // user; alternative is to use lodash
- //                  res.status(201).send({
- //                    _id: user._id,
- //                    name: user.name,
- //                    email: user.email
- //                  });
- //                 } 
- //               )
- //               .catch(
- //                error => res.status(500).send(error.message)
- //               )        
- //         }else {
- //         res.status(400).json({ message: 'User Already Registered'});
- //         }
- //       }
- //     )
- //     .catch(
- //      error => res.status(500).send(error.message)
- //     )
 });
 
 
