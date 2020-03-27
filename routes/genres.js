@@ -1,4 +1,7 @@
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 const {Genre, validate} = require('../models/genre');
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
@@ -29,7 +32,7 @@ router.get('/:id', (req,res) => {
        )
 });
 
-router.post('/', (req,res) => {
+router.post('/', auth, (req,res) => {
  const { name } = req.body;
  const { error } = validate({ name });
  if (error) return res.status(400).send(error['details'][0].message)
@@ -63,7 +66,7 @@ Genre.findByIdAndUpdate(id, { name }, { new: true })
       )
 });
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', [auth, admin], (req,res) => {
  const { id } = req.params;
  Genre.findByIdAndRemove(id)
      .then(
