@@ -1,2 +1,2 @@
-## Genres API
+## genres api
 
