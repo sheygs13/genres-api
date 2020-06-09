@@ -1,2 +1,2 @@
-## genres api
+## rental api
 

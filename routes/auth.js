@@ -1,9 +1,8 @@
 const {User} = require('../models/user');
 const Joi = require('@hapi/joi');
-const mongoose = require('mongoose');
 const express = require('express');
 const bcrypt = require('bcrypt');
-const config = require('config');
+require('dotenv').config()
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
@@ -16,9 +15,7 @@ router.post('/', async (req, res) => {
  if (!user) return res.status(400).json({ message: 'Invalid Email.' });
  const validPassword = await bcrypt.compare(password, user.password);
  if (!validPassword) return res.status(400).json({ message: 'Invalid Password.' });
-                         // payload       //secret key
- const token = jwt.sign({  _id: user._id, isAdmin: user.isAdmin }, config.get('jwtPrivateKey'));
-
+ const token = jwt.sign({  _id: user._id, isAdmin: user.isAdmin }, process.env.Jwt_PrivateKey);
  res.send(token);
 });
 

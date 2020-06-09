@@ -1,17 +1,20 @@
 const jwt = require('jsonwebtoken');
-const config = require('config');
+require('dotenv').config()
 
 module.exports = (req, res, next) => {
-    // get the token from the header if present
-    const token = req.header('x-auth-token');
-    //if no token found, return response (without going to the next middelware)
-    if (!token) return res.status(401).send('Unauthorized. Please provide a token');
-    try{
+  // get the token from the header if present
+  const token = req.header('x-auth-token');
+
+  //if no token found, return response (without going to the next middelware)
+  if (!token) return res.status(401).send('Unauthorized. Please provide a token');
+
+  try {
       //if can verify the token, set req.user and pass to next middleware
-       const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-       req.user = decoded;
-       next();
-    }catch(ex){
-      res.status(400).send('Invalid token.');
-    }
+      const decoded = jwt.verify(token, process.env.Jwt_PrivateKey);
+      req.user = decoded;
+      next();
+  } catch({ message }) {
+    console.error(message)
+    res.status(400).send('Invalid token.');
+  }
 }
