@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = (req, res, next) => {
   // get the token from the header if present
@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
 
   try {
       //if can verify the token, set req.user and pass to next middleware
-      const decoded = jwt.verify(token, process.env.Jwt_PrivateKey);
+      const decoded = jwt.verify(token, process.env.JWT_KEY);
       req.user = decoded;
       next();
   } catch({ message }) {
