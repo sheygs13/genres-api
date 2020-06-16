@@ -48,16 +48,14 @@ router.post('/', async (req, res) => {
      .run();
     res.send(rental);
 
-  }catch(ex){
-     res.status(500).send('Something failed.')
+  } catch({ message }) {
+       res.status(500).json({ error:'Something failed.', message })
   }
 });
 
 router.get('/:id', async (req, res) => {
   const rental = await Rental.findById(req.params.id);
-
   if (!rental) return res.status(404).send('The rental with the given ID was not found.');
-
   res.send(rental);
 });
 

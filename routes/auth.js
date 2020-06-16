@@ -2,8 +2,6 @@ const {User} = require('../models/user');
 const Joi = require('@hapi/joi');
 const express = require('express');
 const bcrypt = require('bcrypt');
-require('dotenv').config()
-const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 
@@ -15,7 +13,7 @@ router.post('/', async (req, res) => {
  if (!user) return res.status(400).json({ message: 'Invalid Email.' });
  const validPassword = await bcrypt.compare(password, user.password);
  if (!validPassword) return res.status(400).json({ message: 'Invalid Password.' });
- const token = jwt.sign({  _id: user._id, isAdmin: user.isAdmin }, process.env.Jwt_PrivateKey);
+ const token = user.generateAuthToken();
  res.send(token);
 });
 

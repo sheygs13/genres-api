@@ -1,8 +1,6 @@
 const {User, validate} = require('../models/user');
 const express = require('express');
 const bcrypt = require('bcrypt');
-require('dotenv').config()
-const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 
@@ -20,8 +18,13 @@ router.post('/', async (req, res) => {
      password: hashed
  });
  await user.save();
- const token = jwt.sign({  _id: user._id, isAdmin: user.isAdmin }, process.env.Jwt_PrivateKey);
- res.header('x-auth-token', token).status(201).send({
+ const token = user.generateAuthToken();
+
+ // store the token in the response header after a user 
+ // has created an account. This just ensures that the 
+ // user does not have to login as he/she can now
+ // make future api request to any permitted route.
+ res.header('x-auth-token', token).status(201).json({
     _id: user._id,
     name: user.name,
     email: user.email

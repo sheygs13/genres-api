@@ -1,13 +1,13 @@
 const auth = require('../middleware/auth');
-const admin = require('../middleware/admin');
+const admin= require('../middleware/admin');
 const {Genre, validate} = require('../models/genre');
 const express = require('express');
 const router = express.Router();
 
 
 router.get('/', async (req, res) => {
-  const genres = await Genre.find().sort('name');
-  res.status(200).send(genres);
+    const genres = await Genre.find().sort('name');
+    res.status(200).send(genres); 
 });
 
 router.get('/:id', async (req,res) => {
@@ -26,7 +26,7 @@ router.post('/', auth, async (req,res) => {
   res.status(201).send(genre)
 });
 
-router.put('/:id', async (req,res) => {
+router.put('/:id', auth, async (req,res) => {
   const { id } = req.params;
   const { name } = req.body;
   const { error } = validate({ name });

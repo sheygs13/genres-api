@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   const token = req.header('x-auth-token');
 
   //if no token found, return response (without going to the next middelware)
-  if (!token) return res.status(401).send('Unauthorized. Please provide a token');
+  if (!token) return res.status(401).json({ message: 'Unauthorized. Please provide a token' });
 
   try {
       //if can verify the token, set req.user and pass to next middleware
@@ -15,6 +15,6 @@ module.exports = (req, res, next) => {
       next();
   } catch({ message }) {
     console.error(message)
-    res.status(400).send('Invalid token.');
+    res.status(400).json({ error: 'Invalid token.', message });
   }
 }
