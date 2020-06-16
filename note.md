@@ -12,3 +12,7 @@ The JWT is ususally stored in the client-side like local-storage
 > 403 (Forbidden)
 
 - Here, the user supplies a valid jwt but is not given the access due to the fact that the user is not an Admin
+
+### The Flow
+
+-> user signs up -> user logs in -> users uses the loggedin token to access permitted routes
