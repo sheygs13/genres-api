@@ -8,11 +8,13 @@
    # Install dependencies
    npm install
 
-   # Rename .env.sample to .env & set secret key
+   # Rename `.env.sample` to `.env` 
    mv .env.sample .env
-   JWT_KEY=<your-key>
+   
+   # Set secret key
+   JWT_KEY=XXXXXXXXX
 
    # Run the app
-    npm start
+   npm start
 
 ```
